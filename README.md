@@ -7,6 +7,13 @@ manage protoc versions.
 ```
 go get -u github.com/garupanojisan/protocenv
 ```
+## PATH Configuration
+
+protocenv creates symbolic link at $HOME/.protocenv/bin to global specified version's bin,
+so please set PATH as below.
+```
+export PATH=$HOME/.protocenv/bin:$PATH
+```
 
 ## Usage
 
