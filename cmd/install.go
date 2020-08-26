@@ -52,12 +52,20 @@ var installCmd = &cobra.Command{
 `,
 	RunE: func(cmd *cobra.Command, args []string) error {
 		if showVersionList {
+			installedVersions, err := getInstalledVersions()
+			if err != nil {
+				return err
+			}
 			versions, err := getAllVersions()
 			if err != nil {
 				return fmt.Errorf("failed to get list of versions: %v", err)
 			}
 			for _, v := range versions {
-				fmt.Printf("   %s: %s\n", v.Name, v.ZipballURL)
+				if _, ok := installedVersions[v.Name]; ok {
+					fmt.Printf("+  %s\n", v.Name)
+				} else {
+					fmt.Printf("   %s\n", v.Name)
+				}
 			}
 			return nil
 		}
@@ -78,6 +86,26 @@ var installCmd = &cobra.Command{
 var (
 	showVersionList bool
 )
+
+func getInstalledVersions() (map[string]bool, error) {
+	homeDir, err := os.UserHomeDir()
+	if err != nil {
+		return nil, err
+	}
+	versionRoot := fmt.Sprintf("%s/.protocenv/versions", homeDir)
+
+	versions := make(map[string]bool)
+	files, err := ioutil.ReadDir(versionRoot)
+	if err != nil {
+		return nil, err
+	}
+	for _, f := range files {
+		if f.IsDir() {
+			versions[f.Name()] = true
+		}
+	}
+	return versions, nil
+}
 
 func init() {
 	rootCmd.AddCommand(installCmd)

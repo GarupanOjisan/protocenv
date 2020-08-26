@@ -18,7 +18,7 @@ require (
 	github.com/spf13/viper v1.7.1
 	golang.org/x/build v0.0.0-20200824230212-cec1aa10836f
 	golang.org/x/mod v0.2.0
-	golang.org/x/sys v0.0.0-20200824131525-c12d262b63d8 // indirect
+	golang.org/x/sys v0.0.0-20200826173525-f9321e4c35a6 // indirect
 	gopkg.in/go-playground/validator.v9 v9.31.0 // indirect
 	gopkg.in/ini.v1 v1.60.1 // indirect
 )
