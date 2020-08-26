@@ -2,6 +2,12 @@
 
 manage protoc versions.
 
+## installation
+
+```
+go get -u github.com/garupanojisan/protocenv
+```
+
 ## Usage
 
 ```
